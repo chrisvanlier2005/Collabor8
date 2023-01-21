@@ -21,5 +21,13 @@ export default class RepositoriesApi {
             console.error(error);
         }
     }
-
+    async content(username, repository, path) {
+        try {
+            const response = await axios.get(`${this.base_url}/${username}/${repository}/contents?path=${path}`);
+            return response.data;
+        }
+        catch (error) {
+            console.error(error);
+        }
+    }
 }

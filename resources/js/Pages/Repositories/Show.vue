@@ -9,9 +9,10 @@ const props = defineProps({
 const repositoriesService = new RepositoriesApi();
 
 let repository = $ref([]);
-
+let contents = $ref([]);
 async function getRepository() {
     repository = await repositoriesService.find(props.username, props.repository);
+    contents = await repositoriesService.content(props.username, props.repository, '');
 }
 
 onMounted(() => {
@@ -20,12 +21,21 @@ onMounted(() => {
 </script>
 <template>
     <h1>Show repository</h1>
-    <div v-if="repository !== []">
+
+    <section v-if="repository !== []">
         <h1 class="text-3xl inter font-semibold">Contents</h1>
-        <section v-if="repository !== []" class="contents-list">
-            <div v-for="content in repository.contents">
-                <h2>{{ content.name }}</h2>
-            </div>
-        </section>
-    </div>
+        <div class v-if="contents === []">
+            ...
+        </div>
+        <div v-else>
+            <ul>
+                <li v-for="content in contents" :key="content.name">
+                    {{ content.name }}
+                </li>
+            </ul>
+        </div>
+    </section>
+    <section v-else>
+        Loading...
+    </section>
 </template>

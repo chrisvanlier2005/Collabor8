@@ -18,10 +18,14 @@ use Inertia\Inertia;
 */
 
 Route::get('/', fn() => Inertia::render('Index'));
-Route::prefix('/repositories')->group(function () {
-    Route::get('/', [RepositoryController::class, 'index'])->name('repositories.index');
-    Route::get('/{username}/{repository_name}', [RepositoryController::class, 'show'])->name('repositories.show');
+Route::middleware(["auth"])->group(function (){
+    Route::prefix('/repositories')->group(function () {
+        Route::get('/', [RepositoryController::class, 'index'])->name('repositories.index');
+        Route::get('/{username}/{repository_name}', [RepositoryController::class, 'show'])->name('repositories.show');
+    });
+
 });
+
 
 
 
