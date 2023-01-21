@@ -24,5 +24,11 @@ class RepositoryController extends Controller
         return response()->json($contents);
     }
 
+    public function content(GithubService $githubService, $username, $repository_name, $path){
+        $content = $githubService->getContentFromRepository($username, $repository_name, $path);
+        return response()->json($content);
+    }
+
+
 
 }
