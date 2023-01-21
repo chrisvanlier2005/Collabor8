@@ -6,7 +6,20 @@ let repositories = $ref("loading");
 let repositoriesService = new RepositoriesApi();
 
 async function getRepositories(name){
-    repositories = await repositoriesService.all(name);
+    if (localStorage.getItem('repositories') === null) {
+        repositories = await repositoriesService.all(name);
+        // only store the repository name and id in local storage
+        let repositoriesToStore = [];
+        for (let i = 0; i < repositories.length; i++) {
+            repositoriesToStore.push({
+                name: repositories[i].name,
+                id: repositories[i].id
+            });
+        }
+        localStorage.setItem('repositories', JSON.stringify(repositoriesToStore));
+    } else {
+        repositories = JSON.parse(localStorage.getItem('repositories'));
+    }
 }
 
 const user = usePage().props.auth.user;
