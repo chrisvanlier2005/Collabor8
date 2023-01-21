@@ -1,22 +1,23 @@
 <script setup>
 import {onMounted, ref} from "vue";
 import RepositoriesApi from "@/Api/RepositoriesApi";
-import {Link, usePage} from "@inertiajs/vue3";
+import {Link, router, usePage} from "@inertiajs/vue3";
 let repositories = $ref("loading");
 let repositoriesService = new RepositoriesApi();
 
 async function getRepositories(name){
-    repositories = await repositoriesService.find(name);
+    repositories = await repositoriesService.all(name);
 }
 
 const user = usePage().props.auth.user;
 
 onMounted(() => {
-    getRepositories(user.name ?? "");
+    getRepositories(user.name);
 });
 
 </script>
 <template>
+
     <h1>My repositories</h1>
 
     <section>
@@ -32,7 +33,8 @@ onMounted(() => {
                     repository_name: repository.name,
                     username: user.name
                 })"
-                :key="repository.id" v-for="repository in repositories">
+                :key="repository.id" v-for="repository in repositories"
+            >
                 <article
                     class="border-b border-gray-200 rounded-lg p-4"
                 >

@@ -13,4 +13,10 @@ class RepositoryController extends Controller
         if ($message) $repositories = [];
         return response()->json($repositories);
     }
+
+    public function show(GithubService $githubService, $username, $repository_name) {
+        $repository = $githubService->getRepositoryFromUser("chrisvanlier2005", $repository_name);
+
+        return response()->json($repository);
+    }
 }
