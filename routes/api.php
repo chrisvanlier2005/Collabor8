@@ -23,6 +23,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::prefix("/repositories/{username}")->group(function () {
     Route::get("/", [RepositoryController::class, "index"])->name("repositories.index");
     Route::get("/{repository_name}", [RepositoryController::class, "show"])->name("repositories.show");
-    Route::get("/{repository_name}/contents", [RepositoryController::class, "contents"])->name("repositories.contents");
-    Route::get("/{repository_name}/contents/{path}", [RepositoryController::class, "content"])->name("repositories.content");
+    Route::get("/{repository_name}/contents", [RepositoryController::class, "content"])->name("repositories.content");
 });

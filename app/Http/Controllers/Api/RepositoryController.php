@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Services\GithubService;
+use Illuminate\Http\Request;
 
 class RepositoryController extends Controller
 {
@@ -24,8 +25,9 @@ class RepositoryController extends Controller
         return response()->json($contents);
     }
 
-    public function content(GithubService $githubService, $username, $repository_name, $path){
-        $content = $githubService->getContentFromRepository($username, $repository_name, $path);
+    public function content(Request $request, GithubService $githubService, $username, $repository_name){
+        abort_if(!$request->has("path"), 400, "Path is required");
+        $content = $githubService->getContentFromRepository($username, $repository_name, $request->path);
         return response()->json($content);
     }
 

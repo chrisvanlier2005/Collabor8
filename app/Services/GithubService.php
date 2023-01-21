@@ -34,7 +34,12 @@ class GithubService {
 
     public function getContentFromRepository($username, $repository, $path) {
         $response = Http::withHeaders($this->base_headers)->get($this->base_url."/repos/".$username."/".$repository."/contents/".$path);
-        return $response->json();
+        $response = $response->json();
+        // base64 decode the content
+        if ($response && isset($response["content"])) {
+            $response["decoded_content"] = base64_decode($response["content"]);
+        }
+        return $response;
     }
 
 }
