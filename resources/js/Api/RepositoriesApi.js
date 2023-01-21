@@ -18,7 +18,7 @@ export default class RepositoriesApi {
             return response.data;
         }
         catch (error) {
-            console.log(error);
+            console.error(error);
         }
     }
 
