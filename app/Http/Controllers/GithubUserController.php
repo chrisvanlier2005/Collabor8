@@ -8,11 +8,14 @@ use Inertia\Inertia;
 class GithubUserController extends Controller
 {
     //
-    public function index(){
+    public function index(Request $request){
+        return Inertia::render("Users/Index", [
+            "username" => $request->input("username") ?? ""
+        ]);
 
     }
     public function show($username) {
-        return Inertia::render("User/Show", [
+        return Inertia::render("Users/Show", [
             "username" => $username
         ]);
     }

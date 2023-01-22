@@ -1,5 +1,5 @@
 <script setup>
-import {Link, router} from "@inertiajs/vue3";
+import {Link} from "@inertiajs/vue3";
 </script>
 <template>
     <section class="flex">
@@ -10,6 +10,9 @@ import {Link, router} from "@inertiajs/vue3";
                 </li>
                 <li>
                     <Link :href="route('repositories.index')">Repositories</Link>
+                </li>
+                <li>
+                    <Link :href="route('users.index')">Users</Link>
                 </li>
             </ul>
         </nav>

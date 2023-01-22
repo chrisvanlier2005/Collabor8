@@ -49,4 +49,13 @@ class GithubService {
         return $response;
     }
 
+    public function getUser($username){
+        $response = Http::withHeaders($this->base_headers)->get($this->base_url."/users/".$username);
+        return $response->json();
+    }
+    public function getUsers($usernameSearch){
+        $response = Http::withHeaders($this->base_headers)->get($this->base_url."/search/users?q=".$usernameSearch."&per_page=10");
+        return $response->json();
+    }
+
 }

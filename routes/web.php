@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\GithubUserController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RepositoryController;
 use Illuminate\Foundation\Application;
@@ -25,7 +26,8 @@ Route::middleware(["auth"])->group(function (){
         Route::get('/{username}/{repository_name}', [RepositoryController::class, 'show'])->name('repositories.show');
     });
     Route::prefix('/users')->group(function () {
-
+        Route::get('/', [GithubUserController::class, 'index'])->name('users.index');
+        Route::get('/{username}', [GithubUserController::class, 'show'])->name('users.show');
     });
 
 });
