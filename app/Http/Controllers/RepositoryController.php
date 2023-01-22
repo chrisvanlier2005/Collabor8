@@ -11,6 +11,11 @@ class RepositoryController extends Controller
     {
         return Inertia::render("Repositories/RepositoriesIndex");
     }
+    public function all($username){
+        return Inertia::render("Repositories/All", [
+            "username" => $username
+        ]);
+    }
     public function show($username, $repository_name){
         return Inertia::render("Repositories/Show", [
             "repository" => $repository_name,
