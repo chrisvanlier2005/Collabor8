@@ -38,6 +38,13 @@ class GithubService {
         // base64 decode the content
         if ($response && isset($response["content"])) {
             $response["decoded_content"] = base64_decode($response["content"]);
+            $response["repository"] = $repository;
+        }
+        // add the repository name to all the files
+        else {
+            foreach ($response as $key => $value) {
+                $response[$key]["repository"] = $repository;
+            }
         }
         return $response;
     }
