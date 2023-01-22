@@ -17,7 +17,7 @@ import {Link} from "@inertiajs/vue3";
             </ul>
         </nav>
         <main class="w-full">
-            <div class="min-h-[4rem] border-b flex items-center flex-row inter">
+            <div class="min-h-[4rem] border-b flex items-center flex-row inter header">
                 <slot name="header">
 
                 </slot>
@@ -26,3 +26,8 @@ import {Link} from "@inertiajs/vue3";
         </main>
     </section>
 </template>
+<style scoped>
+.header:empty {
+    display: none;
+}
+</style>
