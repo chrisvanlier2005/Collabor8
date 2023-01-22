@@ -14,7 +14,11 @@ import {Link, router} from "@inertiajs/vue3";
             </ul>
         </nav>
         <main class="w-full">
+            <div class="min-h-[4rem] border-b flex items-center flex-row inter">
+                <slot name="header">
 
+                </slot>
+            </div>
             <slot/>
         </main>
     </section>

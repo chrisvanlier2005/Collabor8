@@ -16,11 +16,13 @@ let repositoriesService = new RepositoriesApi();
 
 const user = usePage().props.auth.user;
 let username = user.name;
-console.log(username)
+
 </script>
 <template>
     <AppLayout>
-        <h1>My repositories</h1>
+        <template #header>
+            <h1 class="text-3xl font-semibold">Repositories</h1>
+        </template>
         <Suspense>
             <RepositoriesOverview :username="username"/>
             <template #fallback>

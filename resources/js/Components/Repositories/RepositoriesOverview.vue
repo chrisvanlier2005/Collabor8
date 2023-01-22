@@ -2,6 +2,7 @@
 import RepositoriesApi from "@/Api/RepositoriesApi";
 import {Link} from "@inertiajs/vue3";
 import axios from "axios";
+import LanguageLabel from "@/Components/LanguageLabel.vue";
 // import {ref} from "vue";
 const props = defineProps({
     username: String,
@@ -26,6 +27,10 @@ const repositories = repositoriesRequest;
         >
 
             <h2 class="text-lg font-semibold inter">{{ repository.name }}</h2>
+            <LanguageLabel :language="repository.language"/>
+            <p class="text-gray-500 inter">{{ repository.description ? repository.description : "no description" }}</p>
+
+
 
         </article>
     </Link>

@@ -7,8 +7,7 @@ export default class RepositoriesApi {
     async all(id) {
         if (localStorage.getItem("repositories") !== null && localStorage.getItem("repositories") !== undefined && localStorage.getItem("repositories") !== "") {
             let repositories = JSON.parse(localStorage.getItem("repositories"));
-            console.log(repositories[0].owner.login)
-            if (repositories[0].owner.login === id) {
+            if (repositories.length > 0 && repositories[0].owner.login === id) {
                 return repositories;
             } else {
                 return this.sendAll(id);
@@ -50,7 +49,11 @@ export default class RepositoriesApi {
                             description: repository.description,
                             owner: {
                                 login: repository.owner.login,
-                            }
+                                avatar_url: repository.owner.avatar_url,
+                            },
+                            private: repository.private,
+                            language: repository.language,
+
                         }
                         repositoriesToStore.push(repositoryToStore);
                     });
