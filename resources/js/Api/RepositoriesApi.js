@@ -26,17 +26,41 @@ export default class RepositoriesApi {
         }
     }
 
-    async content(username, repository, path) {
-        try {
-            const response = await axios.get(`${this.base_url}/${username}/${repository}/contents?path=${path}`);
-            return response.data;
-        } catch (error) {
-            console.error(error);
+    async content(username, repository, path = "") {
+        if (localStorage.getItem("contents") !== null || localStorage.getItem("contents") !== undefined){
+            let contents = JSON.parse(localStorage.getItem("contents"));
+            if(contents.length > 0 && contents[0].repository === repository){
+                return contents;
+            }else{
+                return this.getContentsFromApi(username, repository, path);
+            }
         }
     }
 
-
-
+    async getContentsFromApi(username, repository, path)
+    {
+        return new Promise((resolve, reject) => {
+            axios.get(`${this.base_url}/${username}/${repository}/contents?path=${path}`)
+                .then(response => {
+                    let contentsToStore = [];
+                    response.data.forEach(content => {
+                        let contentToStore = {
+                            name: content.name,
+                            path: content.path,
+                            type: content.type,
+                            repository: repository,
+                        }
+                        contentsToStore.push(contentToStore);
+                    });
+                    localStorage.setItem("contents", JSON.stringify(contentsToStore));
+                    resolve(response.data);
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+        })
+    }
+    // get new repositories and store them in the local storage.
     async sendAll(id){
         return new Promise((resolve, reject) => {
             axios.get(`${this.base_url}/${id}`)
