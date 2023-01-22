@@ -1,12 +1,13 @@
 <script setup>
-import {onMounted} from "vue";
-import RepositoriesApi from "@/Api/RepositoriesApi.js";
 import AppLayout from "@/Layouts/AppLayout.vue";
-import RepositoriesOverview from "@/Components/Repositories/RepositoriesOverview.vue";
 import RepositoryView from "@/Pages/Repositories/Components/RepositoryView.vue";
 const props = defineProps({
     repository: String,
-    username: String
+    username: String,
+    path: {
+        type: String,
+        default: ''
+    }
 });
 </script>
 <template>
@@ -16,9 +17,13 @@ const props = defineProps({
         </template>
         <section class="grid grid-cols-2">
             <Suspense>
-                <RepositoryView :username="username" :repository="repository" />
+                <RepositoryView :username="username"
+                                :path="path"
+                                :repository="repository" />
                 <template #fallback>
-                    <p>Loading repository...</p>
+                    <ul class="flex gap-3 flex-col">
+                        <li v-for="n in 10" :key="1" class="loading-gradient w-full py-3 h-6 rounded-md"></li>
+                    </ul>
                 </template>
             </Suspense>
         </section>

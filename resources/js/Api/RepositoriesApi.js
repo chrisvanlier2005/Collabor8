@@ -28,8 +28,12 @@ export default class RepositoriesApi {
 
     async content(username, repository, path = "") {
         if (localStorage.getItem("contents") !== null || localStorage.getItem("contents") !== undefined){
+
             let contents = JSON.parse(localStorage.getItem("contents"));
-            if(contents.length > 0 && contents[0].repository === repository){
+            console.log(contents[0].path, path)
+            if(contents.length > 0
+                && contents[0].repository === repository
+                && contents[0].path === path){
                 return contents;
             }else{
                 return this.getContentsFromApi(username, repository, path);
@@ -49,6 +53,7 @@ export default class RepositoriesApi {
                             path: content.path,
                             type: content.type,
                             repository: repository,
+
                         }
                         contentsToStore.push(contentToStore);
                     });
