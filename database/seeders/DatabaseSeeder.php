@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Team;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -25,5 +26,11 @@ class DatabaseSeeder extends Seeder
             "name" => 'chrisvanlier2005',
             "email" => "chrisvanliercvl@gmail.com"
         ]);
+
+        $team = Team::create([
+            "name" => "Team 1",
+            "slug" => "team-1"
+        ]);
+
     }
 }

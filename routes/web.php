@@ -29,7 +29,12 @@ Route::middleware(["auth"])->group(function (){
         Route::get('/', [GithubUserController::class, 'index'])->name('users.index');
         Route::get('/{username}', [GithubUserController::class, 'show'])->name('users.show');
     });
-
+    Route::prefix("/dashboard")->group(function () {
+        Route::get('/', fn() => Inertia::render('Dashboard'))->name('dashboard');
+    });
+    Route::prefix("/teams")->group(function () {
+        Route::get('/', fn() => Inertia::render('Teams/Index'))->name('teams.index');
+    });
 });
 
 
@@ -39,9 +44,6 @@ Route::middleware(["auth"])->group(function (){
 
 
 // PHP BREEZE ROUTES DEFAULT
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

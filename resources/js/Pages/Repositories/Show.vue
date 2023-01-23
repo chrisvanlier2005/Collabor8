@@ -16,6 +16,7 @@ const props = defineProps({
             <h1 class="text-3xl font-semibold">Repository</h1>
         </template>
         <section class="grid grid-cols-2">
+            
             <Suspense>
                 <RepositoryView :username="username"
                                 :path="path"

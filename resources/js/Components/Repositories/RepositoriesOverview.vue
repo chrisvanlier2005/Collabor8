@@ -1,17 +1,12 @@
-<script async setup>
-import RepositoriesApi from "@/Api/RepositoriesApi";
-import {Link} from "@inertiajs/vue3";
-import axios from "axios";
+<script setup>
 import LanguageLabel from "@/Components/LanguageLabel.vue";
-// import {ref} from "vue";
+import {Link} from "@inertiajs/vue3";
 const props = defineProps({
     username: String,
+    repositories: {
+        default: []
+    }
 });
-
-let repositoryApi = new RepositoriesApi();
-const repositoriesRequest = await repositoryApi.all(props.username);
-const repositories = repositoriesRequest;
-
 </script>
 <template>
 

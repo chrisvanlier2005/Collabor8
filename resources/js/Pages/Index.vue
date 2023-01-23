@@ -33,8 +33,10 @@ defineProps({
                 </div>
             </div>
         </section>
-        <section>
-
+        <section class="max-w-7xl px-12 mx-auto">
+            <div>
+                <h2 class="capitalize text-5xl inter font-semibold">Discover Collabor8s<br>supercharged powers</h2>
+            </div>
         </section>
     </LandingLayout>
 </template>

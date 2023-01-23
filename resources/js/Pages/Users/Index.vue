@@ -2,7 +2,7 @@
 import UsersApi from "@/Api/UsersApi";
 import {onMounted} from "vue";
 import AppLayout from "@/Layouts/AppLayout.vue";
-
+import {Link} from "@inertiajs/vue3";
 
 const props = defineProps({
     search: {
@@ -39,10 +39,12 @@ onMounted(() => {
             <input type="text" v-model="searchRef" @change="search" />
             <p v-if="searching">Searching...</p>
             <ul v-if="!searching" class="p-4">
-                <li v-for="user in users.items" :key="user.id" class="flex flex-row gap-3 items-center">
+                <Link as="li" v-for="user in users.items" :key="user.id"
+                      :href="route('repositories.all', user.login)"
+                      class="flex flex-row gap-3 items-center cursor-pointer">
                     <img :src="user.avatar_url" alt="avatar" class="w-12 aspect-square rounded-md" />
                     <h2 class="text-xl inter font-semibold">{{ user.login}}</h2>
-                </li>
+                </Link>
                 <li v-if="users.items.length === 0">No search results for {{searchRef}}</li>
 
             </ul>

@@ -8,13 +8,22 @@ use Inertia\Inertia;
 
 class RepositoryController extends Controller
 {
-    public function index()
+    public function index(GithubService $githubService)
     {
-        return Inertia::render("Repositories/RepositoriesIndex");
+        return Inertia::render("Repositories/RepositoriesIndex",
+        [
+            "username" => auth()->user()->name,
+            "repositories" => Inertia::lazy(function() use ($githubService){
+                return $githubService->getRepositoriesFromUser(auth()->user()->name);
+            })
+        ]);
     }
-    public function all($username){
+    public function all(GithubService $githubService, $username){
         return Inertia::render("Repositories/All", [
-            "username" => $username
+            "username" => $username,
+            "repositories" => Inertia::lazy(function() use ($username, $githubService){
+                return $githubService->getRepositoriesFromUser($username);
+            })
         ]);
     }
     public function show(Request $request, $username, $repository_name){
