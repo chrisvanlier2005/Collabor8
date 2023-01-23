@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string("name");
             $table->string("full_name");
             $table->boolean("private");
-            $table->string("description")->nullable();
+            $table->longText("description")->nullable();
             $table->string("language");
             $table->integer("subscribers_count");
             $table->integer("network_count");
