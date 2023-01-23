@@ -20,6 +20,9 @@ class GithubService {
 
     public function getRepositoriesFromUser($username){
         $user = GithubUser::where("login", $username)->with("repositories")->first();
+        if (!$user){
+            $user = $this->getUser($username);
+        }
         if ($user && $user->repositories->count() > 0) {
             return $user->repositories;
         }
@@ -97,7 +100,7 @@ class GithubService {
         $user = GithubUser::firstOrCreate([
             "github_id" => $response["id"],
             "login" => $response["login"],
-            "name" => $response["name"],
+            "name" => $response["name"] ?? $response["login"],
             "avatar_url" => $response["avatar_url"],
             "type" => $response["type"],
             "bio" => $response["bio"],

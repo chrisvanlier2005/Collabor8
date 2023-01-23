@@ -2,7 +2,7 @@
 import {Link} from "@inertiajs/vue3";
 </script>
 <template>
-     <nav class="w-48 h-screen">
+     <nav class="w-48 h-screen sticky top-0 h-screen">
         <ul class="flex w-full flex-col gap-3 pl-2 py-2 h-full inter">
             <li class="w-full">
                 <Link class="w-full block rounded-sm p-2 py-1"
