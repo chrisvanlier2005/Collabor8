@@ -1,4 +1,8 @@
+<script setup>
+import LandingNavigation from "@/Components/LandingNavigation.vue";
+</script>
 <template>
+    <LandingNavigation/>
     <main class="app-container relative">
         <slot/>
     </main>
@@ -21,6 +25,8 @@ export default {
     width: 100%;
     height: 100%;
     background-image: url("/static/halftone-background.svg");
-    background-size: cover;
+    background-size: 100%;
+    background-repeat: repeat;
+
 }
 </style>

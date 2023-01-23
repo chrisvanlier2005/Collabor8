@@ -3,6 +3,9 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+    scroll-behavior: smooth;
+}
 .inter {
     font-family: Inter, serif, sans-serif;
 }
@@ -49,4 +52,8 @@ nav ul li a {
 nav ul li a:hover {
     color: #0077d1;
     background-color: rgba(98, 200, 255, 0.4);
+}
+
+body {
+    overflow-x: hidden;
 }
