@@ -19,7 +19,7 @@ use Inertia\Inertia;
 */
 
 Route::get('/', fn() => Inertia::render('Index'));
-Route::middleware(["auth"])->group(function (){
+Route::group(["middleware" => "auth", "prefix" => "/github"], function (){
     Route::prefix('/repositories')->group(function () {
         Route::get('/', [RepositoryController::class, 'index'])->name('repositories.index');
         Route::get('/{username}', [RepositoryController::class, 'all'])->name('repositories.all');
