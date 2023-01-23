@@ -19,4 +19,10 @@ class GithubRepository extends Model
         "subscribers_count",
         "network_count"
     ];
+
+    public function githubUser()
+    {
+        return $this->belongsTo(GithubUser::class, "github_user_id", "id");
+    }
+
 }

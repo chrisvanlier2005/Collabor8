@@ -25,7 +25,7 @@ router.reload({
 <template>
     <AppLayout>
         <template #header>
-            <h1 class="text-3xl font-semibold">Repositories</h1>
+            <h1 class="text-3xl font-semibold">My Repositories</h1>
         </template>
         <Suspense>
             <RepositoriesOverview :username="username" :repositories="repositoriesRef"/>

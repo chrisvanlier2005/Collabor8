@@ -27,3 +27,26 @@
     background: #fff;
     background: linear-gradient(to right, #eeeeee 8%, #dddddd 18%, #eeeeee 33%);
 }
+
+a:has(svg.active-icon){
+    background-color: rgba(98, 200, 255, 0.4);
+    height: 100%;
+}
+.active-icon {
+    color: #0077d1;
+}
+
+nav .active {
+    color: #0077d1;
+    font-weight: 600;
+    background-color: rgba(98, 200, 255, 0.4);
+}
+
+nav ul li a {
+    transition: all 100ms;
+}
+
+nav ul li a:hover {
+    color: #0077d1;
+    background-color: rgba(98, 200, 255, 0.4);
+}

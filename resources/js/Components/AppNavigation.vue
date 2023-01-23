@@ -1,32 +1,39 @@
 <script setup>
+import GithubLinks from "@/Components/Navigation/GithubLinks.vue";
+import HomeIcon from "@/Components/Icons/HomeIcon.vue";
 import {Link} from "@inertiajs/vue3";
-</script>
+import GitIcon from "@/Components/Icons/GitIcon.vue";</script>
 <template>
-     <nav class="w-48 h-screen sticky top-0 h-screen">
-        <ul class="flex w-full flex-col gap-3 pl-2 py-2 h-full inter">
+    <nav class="w-48 w-96 h-screen sticky top-0 h-screen">
+        <div class="w-full h-16 overflow-x-hidden flex">
+            <Link :href="route('dashboard')" class="flex items-center px-3">
+                <HomeIcon :class="{
+                              'active-icon': $page.component === 'Dashboard',
+
+                          }"
+                          class="text-gray-400 h-7 cursor-pointer hover:text-gray-900"/>
+            </Link>
+            <Link :href="route('repositories.index')" class="flex items-center px-3">
+                <GitIcon :class="{
+                              'active-icon': $page.component === 'Repositories/Index'
+                          }"
+                          class="text-gray-400 h-9 cursor-pointer hover:text-gray-900"/>
+            </Link>
+
+        </div>
+        <ul
+            class="flex w-full flex-col gap-3 pl-2 py-2 inter">
+
             <li class="w-full">
                 <Link class="w-full block rounded-sm p-2 py-1"
-                    :href="route('dashboard')" :class="{
-                    'active': $page.url === '/dashboard'
-                }">Home</Link>
-            </li>
-            <li class="w-full">
-                <Link class="w-full block rounded-sm p-2 py-1"
-                      :href="route('repositories.index')"
+                      :href="route('dashboard')"
                       :class="{
-                        'active': $page.url === '/repositories'
-                      }">Repositories</Link>
-            </li>
-            <li class="w-full"
-            >
-                <Link
-                    class="w-full block rounded-sm p-2 py-1"
-                    :href="route('users.index')"
-                    :class="{
-                        'active': $page.url === '/users'
-                    }">Users</Link>
+                        'active': $page.component === 'Dashboard'
+                      }">Dashboard
+                </Link>
             </li>
         </ul>
+        <GithubLinks v-if="$page.url.startsWith('/github')"/>
     </nav>
 </template>
 <script>
@@ -34,17 +41,3 @@ export default {
     name: 'AppNavigation'
 }
 </script>
-<style scoped>
-.active {
-    color: #2e0046;
-    font-weight: 600;
-    background-color: rgba(82, 0, 123, 0.4);
-}
-ul li a {
-    transition: all 100ms;
-}
-ul li a:hover{
-    color: #2e0046;
-    background-color: rgba(82, 0, 123, 0.4);
-}
-</style>

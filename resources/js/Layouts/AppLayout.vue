@@ -5,7 +5,7 @@ import AppNavigation from "@/Components/AppNavigation.vue";
 <template>
     <section class="flex">
         <AppNavigation/>
-        <main class="w-full">
+        <main class="w-full pl-4">
             <div class="min-h-[4rem] border-b flex items-center flex-row inter header">
                 <slot name="header">
 

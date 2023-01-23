@@ -1,5 +1,6 @@
 <?php
 namespace App\Services;
+use App\Models\GithubContent;
 use App\Models\GithubRepository;
 use App\Models\GithubUser;
 use Illuminate\Support\Facades\Http;
@@ -73,9 +74,35 @@ class GithubService {
     }
 
     public function getContentFromRepository($username, $repository, $path) {
+        $full_repository_name = $username."/".$repository;
+        // this is for a file
+        if ($path != "" && GithubContent::where("path", $path)->where("repository", $full_repository_name)->where("content", "!=", null)->exists()) {
+            return GithubContent::where("path", $path)->where("repository", $full_repository_name)->first();
+        }
+        // if the path is empty we are getting the root of the repository, so get all the contents without the ones that do have a / in the path
+        if ($path == "" && GithubContent::where("path", "!=", "")->where("repository", $full_repository_name)->exists()) {
+            return GithubContent::
+            where("path", "!=", "")
+            ->where("path", "not like", "%/%")
+                ->where("repository", $full_repository_name)->get();
+        }
+        // if the path is not empty but doesnt have a extension, we are getting a folder, so get all the contents that have the path as a prefix
+        if ($path != "" && !str_contains($path, ".") && GithubContent::where("path", "like", $path."/%")->where("repository", $full_repository_name)->exists()) {
+            return GithubContent::where("path", "like", $path."/%")->where("repository", $full_repository_name)->get();
+        }
+
         $response = Http::withHeaders($this->base_headers)->get($this->base_url."/repos/".$username."/".$repository."/contents/".$path);
         $response = $response->json();
-        // base64 decode the content
+        $is_file = false;
+        if ($response && isset($response["content"])) {
+            $response["decoded_content"] = base64_decode($response["content"]);
+            $is_file = true;
+        }
+        $content = GithubServiceCache::cacheContents($response, $full_repository_name, $is_file);
+
+        return $content;
+        /*$response = Http::withHeaders($this->base_headers)->get($this->base_url."/repos/".$username."/".$repository."/contents/".$path);
+        $response = $response->json();
         if ($response && isset($response["content"])) {
             $response["decoded_content"] = base64_decode($response["content"]);
             $response["repository"] = $repository;
@@ -86,7 +113,7 @@ class GithubService {
                 $response[$key]["repository"] = $repository;
             }
         }
-        return $response;
+        return $response;*/
     }
 
     public function getUser($username){
@@ -115,4 +142,38 @@ class GithubService {
         return $response;
     }
 
+}
+
+
+class GithubServiceCache{
+    public static function cacheContents($response, $full_repository_name, $is_file){
+
+        if (!$is_file){
+            return $response;
+            foreach($response as $content){
+                $content = GithubContent::firstOrCreate([
+                    "name" => $content["name"],
+                    "path" => $content["path"],
+                    "type" => $content["type"],
+                    "size" => $content["size"],
+                    "repository" => $full_repository_name,
+                ]);
+            }
+            return $response;
+
+        }
+        else {
+            $content = GithubContent::firstOrCreate([
+                "name" => $response["name"],
+                "path" => $response["path"],
+                "type" => $response["type"],
+                "size" => $response["size"],
+
+                "repository" => $full_repository_name,
+            ]);
+            $content->content = $response["decoded_content"];
+            $content->save();
+        }
+        return $content;
+    }
 }

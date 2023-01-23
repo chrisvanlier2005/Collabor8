@@ -19,6 +19,11 @@ use Inertia\Inertia;
 */
 
 Route::get('/', fn() => Inertia::render('Index'));
+
+Route::group(["middleware" => "auth", "prefix" => "/dashboard"], function () {
+    Route::get('/', fn() => Inertia::render('Dashboard'))->name('dashboard');
+});
+
 Route::group(["middleware" => "auth", "prefix" => "/github"], function (){
     Route::prefix('/repositories')->group(function () {
         Route::get('/', [RepositoryController::class, 'index'])->name('repositories.index');
@@ -29,11 +34,12 @@ Route::group(["middleware" => "auth", "prefix" => "/github"], function (){
         Route::get('/', [GithubUserController::class, 'index'])->name('users.index');
         Route::get('/{username}', [GithubUserController::class, 'show'])->name('users.show');
     });
-    Route::prefix("/dashboard")->group(function () {
-        Route::get('/', fn() => Inertia::render('Dashboard'))->name('dashboard');
-    });
     Route::prefix("/teams")->group(function () {
         Route::get('/', fn() => Inertia::render('Teams/Index'))->name('teams.index');
+    });
+
+    Route::prefix('/reload')->group(function () {
+        // reloading / recaching of data
     });
 });
 

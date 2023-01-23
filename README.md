@@ -4,9 +4,5 @@ Dit is een zijproject waar in mijn vrije tijd aan begin dat collaboratie makkeli
 ## Features
 Dit is meer een lijst van onderwerpen waar ik mee bezig ben dan een lijst van features. 
 
-- [ ] Github integration
-- [ ] Live Chatting
-- [ ] File sharing
+- [x] Github repository viewer
 - [ ] Project management
-- [ ] Task management
-

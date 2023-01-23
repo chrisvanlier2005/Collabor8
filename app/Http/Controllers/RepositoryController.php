@@ -10,7 +10,7 @@ class RepositoryController extends Controller
 {
     public function index(GithubService $githubService)
     {
-        return Inertia::render("Repositories/RepositoriesIndex",
+        return Inertia::render("Repositories/Index",
         [
             "username" => auth()->user()->name,
             "repositories" => Inertia::lazy(function() use ($githubService){
