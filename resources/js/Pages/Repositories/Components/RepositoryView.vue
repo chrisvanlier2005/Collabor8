@@ -11,7 +11,7 @@ const props = defineProps({
         default: ''
     }
 });
-console.log(props.path)
+
 let repositoryService = new RepositoriesApi();
 
 const repositoryContent = await repositoryService.content(props.username, props.repository, props.path);
@@ -19,8 +19,9 @@ const repositoryContent = await repositoryService.content(props.username, props.
 </script>
 <template>
     <div>
-        <h1>Repository</h1>
-        <ul class="overflow-y-auto h-96">
+        <h1 class="text-3xl font-semibold">{{ repository }}</h1>
+        {{typeof repositoryContent}}
+        <ul class="overflow-y-auto h-96" v-if="!repositoryContent.content">
             <li v-for="content in repositoryContent" :key="content.id">
                 <Link :href="route('repositories.show', {
                     repository_name: repository,
@@ -36,6 +37,13 @@ const repositoryContent = await repositoryService.content(props.username, props.
                 </Link>
             </li>
         </ul>
+        <div>
+            <pre>
+{{ repositoryContent.content}}
+
+
+            </pre>
+        </div>
     </div>
 </template>
 <script>
