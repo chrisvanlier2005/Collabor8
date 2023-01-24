@@ -11,7 +11,7 @@ class GithubService
     private $key; // github api key
     private $base_url = "https://api.github.com";
 
-    private $cache_time = 60 * 30; // 30 minutes
+    private $cache_time = 60 * 60 * 24; // 1 day
     private $base_headers = [
         "Accept" => "application/vnd.github.v3+json",
         "Content-Type" => "application/json",
@@ -98,6 +98,9 @@ class GithubService
         return Cache::remember("github_content_" . $username . "_" . $repository . "_" . $path, $this->cache_time, function () use ($username, $repository, $path) {
             $response = Http::withHeaders($this->base_headers)->get($this->base_url . "/repos/" . $username . "/" . $repository . "/contents/" . $path);
             $response = $response->json();
+            if (isset($response["content"])) {
+                $response["content"] = base64_decode($response["content"]);
+            }
             return $response;
         });
 
