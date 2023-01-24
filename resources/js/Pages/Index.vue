@@ -3,6 +3,7 @@ import {Head} from '@inertiajs/vue3';
 import LandingLayout from "@/Layouts/LandingLayout.vue";
 import PurpleButton from "@/Components/Buttons/PurpleButton.vue";
 import SecondaryButton from "@/Components/Buttons/SecondaryButton.vue";
+import GitIcon from "@/Components/Icons/GitIcon.vue";
 
 defineProps({
     canLogin: Boolean,
@@ -47,8 +48,21 @@ defineProps({
         <section
             id="discover"
             class="max-w-7xl px-12 mx-auto min-h-screen">
-            <div>
-                <h2 class="capitalize text-5xl inter font-semibold">Discover Collabor8s<br>supercharged powers</h2>
+            <div class="header mb-6">
+                <h2 class="capitalize text-5xl inter font-semibold">Discover Collabor8s<br>
+                    <span class="text-purple-500">
+                        supercharged
+                    </span>
+                    powers</h2>
+            </div>
+            <div class="lg:grid-cols-4 md:grid-cols-2 grid">
+                <article class="flex flex-col items-start gap-3 bg-white lg:col-span-2 p-3 rounded-md">
+                    <GitIcon class="h-24"/>
+                    <div class="text-lg inter">
+                        <h3 class="text-2xl font-semibold">Github Intergration</h3>
+                        <p class="text-gray-500">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.</p>
+                    </div>
+                </article>
             </div>
         </section>
     </LandingLayout>
