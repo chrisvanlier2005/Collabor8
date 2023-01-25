@@ -2,7 +2,8 @@
 import GithubLinks from "@/Components/Navigation/GithubLinks.vue";
 import HomeIcon from "@/Components/Icons/HomeIcon.vue";
 import {Link} from "@inertiajs/vue3";
-import GitIcon from "@/Components/Icons/GitIcon.vue";</script>
+import GitIcon from "@/Components/Icons/GitIcon.vue";
+import TeamIcon from "@/Components/Icons/TeamIcon.vue";</script>
 <template>
     <nav class="w-48 w-96 h-screen sticky top-0 h-screen">
         <div class="w-full h-16 overflow-x-hidden flex">
@@ -19,6 +20,11 @@ import GitIcon from "@/Components/Icons/GitIcon.vue";</script>
                           }"
                           class="text-gray-400 h-9 cursor-pointer hover:text-gray-900"/>
             </Link>
+            <Link :href="route('teams.index')" class="flex items-center px-3">
+                <TeamIcon :class="{
+                              'active-icon': $page.component === 'Teams/Index'
+                          }" class="text-gray-400 h-9 cursor-pointer hover:text-gray-900"/>
+            </Link>
 
         </div>
         <ul
@@ -34,6 +40,9 @@ import GitIcon from "@/Components/Icons/GitIcon.vue";</script>
             </li>
         </ul>
         <GithubLinks v-if="$page.url.startsWith('/github')"/>
+        <slot name="additional-links">
+
+        </slot>
     </nav>
 </template>
 <script>

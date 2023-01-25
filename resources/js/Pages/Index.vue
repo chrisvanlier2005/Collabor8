@@ -4,6 +4,9 @@ import LandingLayout from "@/Layouts/LandingLayout.vue";
 import PurpleButton from "@/Components/Buttons/PurpleButton.vue";
 import SecondaryButton from "@/Components/Buttons/SecondaryButton.vue";
 import GitIcon from "@/Components/Icons/GitIcon.vue";
+import DirectoryIcon from "@/Components/Icons/DirectoryIcon.vue";
+import HomeIcon from "@/Components/Icons/HomeIcon.vue";
+import ChatIcon from "@/Components/Icons/ChatIcon.vue";
 
 defineProps({
     canLogin: Boolean,
@@ -55,11 +58,32 @@ defineProps({
                     </span>
                     powers</h2>
             </div>
-            <div class="lg:grid-cols-4 md:grid-cols-2 grid">
+            <div class="lg:grid-cols-4 md:grid-cols-2 grid gap-4">
                 <article class="flex flex-col items-start gap-3 bg-white lg:col-span-2 p-3 rounded-md">
                     <GitIcon class="h-24"/>
                     <div class="text-lg inter">
                         <h3 class="text-2xl font-semibold">Github Intergration</h3>
+                        <p class="text-gray-500">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.</p>
+                    </div>
+                </article>
+                <article class="flex flex-col items-start gap-3 bg-white lg:col-span-2 p-3 rounded-md">
+                    <DirectoryIcon class="h-24"/>
+                    <div class="text-lg inter">
+                        <h3 class="text-2xl font-semibold">Project management</h3>
+                        <p class="text-gray-500">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.</p>
+                    </div>
+                </article>
+                <article class="flex flex-col items-start gap-3 bg-white p-3 rounded-md">
+                    <HomeIcon class="h-16"/>
+                    <div class="inter">
+                        <h3 class="text-1xl font-semibold">Self hosted</h3>
+                        <p class="text-gray-500 ">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.</p>
+                    </div>
+                </article>
+                <article class="flex flex-col items-start gap-3 bg-white lg:col-span-1 p-3 rounded-md">
+                    <ChatIcon class="h-16"/>
+                    <div class=" inter">
+                        <h3 class="text-2xl font-semibold">Teams</h3>
                         <p class="text-gray-500">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.</p>
                     </div>
                 </article>

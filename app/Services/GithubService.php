@@ -116,6 +116,14 @@ class GithubService
 
     }
 
+    public function searchRepositoriesInUser($username, $search){
+        return Cache::remember("github_user_{$username}_search_{$search}", $this->cache_time, function() use ($username, $search){
+           $response = Http::withHeaders($this->base_headers)->get($this->base_url . "/search/repositories?q=user:{$username}+{$search}&per_page=10");
+           $response = $response->json();
+           return $response;
+        });
+    }
+
     public function getUsers($usernameSearch)
     {
         return Cache::remember("github_users_" . $usernameSearch, $this->cache_time, function () use ($usernameSearch) {

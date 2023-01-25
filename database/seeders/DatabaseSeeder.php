@@ -32,5 +32,10 @@ class DatabaseSeeder extends Seeder
             "slug" => "team-1"
         ]);
 
+        $team->users()->attach(
+            User::first(),
+            ["role" => "owner"]
+        );
+
     }
 }

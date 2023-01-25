@@ -2,10 +2,12 @@
 import LandingNavigation from "@/Components/LandingNavigation.vue";
 </script>
 <template>
-    <LandingNavigation/>
-    <main class="app-container relative">
-        <slot/>
-    </main>
+    <div class="min-h-screen">
+        <LandingNavigation/>
+        <main class="app-container relative">
+            <slot/>
+        </main>
+    </div>
 </template>
 <script>
 export default {

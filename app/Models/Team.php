@@ -16,6 +16,6 @@ class Team extends Model
     }
     public function users()
     {
-        return $this->hasManyThrough(User::class, TeamUser::class);
+        return $this->belongsToMany(User::class, 'team_users', 'team_id', 'user_id');
     }
 }

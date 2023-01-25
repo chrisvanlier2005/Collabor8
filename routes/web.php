@@ -3,6 +3,7 @@
 use App\Http\Controllers\GithubUserController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RepositoryController;
+use App\Http\Controllers\TeamController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -24,6 +25,16 @@ Route::group(["middleware" => "auth", "prefix" => "/dashboard"], function () {
     Route::get('/', fn() => Inertia::render('Dashboard'))->name('dashboard');
 });
 
+
+Route::group(["prefix" => "teams", "middleware" => "auth"], function () {
+    Route::get('/', [TeamController::class, 'index'])->name('teams.index');
+    Route::get('/{id}', [TeamController::class, 'show'])->name('teams.show');
+    Route::get('/create', [TeamController::class, 'create'])->name('teams.create');
+    Route::post('/', [TeamController::class, 'store'])->name('teams.store');
+    Route::put('/{id}', [TeamController::class, 'update'])->name('teams.update');
+});
+
+
 Route::group(["middleware" => "auth", "prefix" => "/github"], function (){
     Route::prefix('/repositories')->group(function () {
         Route::get('/', [RepositoryController::class, 'index'])->name('repositories.index');
@@ -35,7 +46,7 @@ Route::group(["middleware" => "auth", "prefix" => "/github"], function (){
         Route::get('/{username}', [GithubUserController::class, 'show'])->name('users.show');
     });
     Route::prefix("/teams")->group(function () {
-        Route::get('/', fn() => Inertia::render('Teams/Index'))->name('teams.index');
+        //Route::get('/', fn() => Inertia::render('Teams/Index'))->name('teams.index');
     });
 
     Route::prefix('/reload')->group(function () {
