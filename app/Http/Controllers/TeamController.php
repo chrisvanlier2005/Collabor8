@@ -18,7 +18,7 @@ class TeamController extends Controller
         ]);
     }
     public function show(Request $request, $id){
-        $team = Team::with("users")->findOrFail($id);
+        $team = Team::with("users", "message.user")->findOrFail($id);
         return Inertia::render("Teams/Show", [
             "team" => $team
         ]);

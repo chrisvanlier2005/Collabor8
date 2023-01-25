@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\Team;
+use App\Models\TeamMessage;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -27,15 +28,19 @@ class DatabaseSeeder extends Seeder
             "email" => "chrisvanliercvl@gmail.com"
         ]);
 
-        $team = Team::create([
-            "name" => "Team 1",
-            "slug" => "team-1"
-        ]);
+        $teams =  Team::factory(10)->create();
+        foreach($teams as $team){
+            $team->users()->attach(User::all()->first(),[
+                'role' => "normal"
+            ]);
+            // attach  messages
+            TeamMessage::factory(10)->create([
+                'team_id' => $team->id,
+                'user_id' => User::all()->random(1)->first()->id
+            ]);
+        }
 
-        $team->users()->attach(
-            User::first(),
-            ["role" => "owner"]
-        );
 
     }
 }
+
