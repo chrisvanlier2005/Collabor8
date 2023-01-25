@@ -4,7 +4,11 @@ import AppNavigation from "@/Components/AppNavigation.vue";
 </script>
 <template>
     <section class="flex">
-        <AppNavigation/>
+        <AppNavigation>
+            <template #additional-links>
+                <slot name="additional-links"/>
+            </template>
+        </AppNavigation>
         <main class="w-full pl-4">
             <div class="min-h-[4rem] border-b flex items-center flex-row inter header">
                 <slot name="header">

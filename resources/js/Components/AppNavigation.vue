@@ -16,13 +16,13 @@ import TeamIcon from "@/Components/Icons/TeamIcon.vue";</script>
             </Link>
             <Link :href="route('repositories.index')" class="flex items-center px-3">
                 <GitIcon :class="{
-                              'active-icon': $page.component === 'Repositories/Index'
+                              'active-icon': $page.url.startsWith('/github')
                           }"
                           class="text-gray-400 h-9 cursor-pointer hover:text-gray-900"/>
             </Link>
             <Link :href="route('teams.index')" class="flex items-center px-3">
                 <TeamIcon :class="{
-                              'active-icon': $page.component === 'Teams/Index'
+                              'active-icon': $page.url.startsWith('/teams')
                           }" class="text-gray-400 h-9 cursor-pointer hover:text-gray-900"/>
             </Link>
 
