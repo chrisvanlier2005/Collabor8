@@ -57,3 +57,9 @@ nav ul li a:hover {
 body {
     overflow-x: hidden;
 }
+
+.purple-blue-icon {
+    background: linear-gradient(90deg, #7f00ff 0%, #e100ff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}

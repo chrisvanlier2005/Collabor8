@@ -23,4 +23,5 @@ class TeamController extends Controller
             "team" => $team
         ]);
     }
+
 }

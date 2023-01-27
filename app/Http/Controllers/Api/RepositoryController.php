@@ -30,7 +30,4 @@ class RepositoryController extends Controller
         $content = $githubService->getContentFromRepository($username, $repository_name, $request->path);
         return response()->json($content);
     }
-
-
-
 }

@@ -4,6 +4,7 @@ use App\Http\Controllers\GithubUserController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RepositoryController;
 use App\Http\Controllers\TeamController;
+use App\Http\Controllers\TeamMessageController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -32,6 +33,10 @@ Route::group(["prefix" => "teams", "middleware" => "auth"], function () {
     Route::get('/create', [TeamController::class, 'create'])->name('teams.create');
     Route::post('/', [TeamController::class, 'store'])->name('teams.store');
     Route::put('/{id}', [TeamController::class, 'update'])->name('teams.update');
+
+    Route::prefix("/message")->group(function () {
+        Route::post('/{team_id}', [TeamMessageController::class, 'store'])->name('teams.message.store');
+    });
 });
 
 

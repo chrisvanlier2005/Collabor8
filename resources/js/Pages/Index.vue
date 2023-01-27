@@ -81,7 +81,7 @@ defineProps({
                     </div>
                 </article>
                 <article class="flex flex-col items-start gap-3 bg-white lg:col-span-1 p-3 rounded-md">
-                    <ChatIcon class="h-16"/>
+                    <ChatIcon class="h-16 purple-blue-icon  "/>
                     <div class=" inter">
                         <h3 class="text-2xl font-semibold">Teams</h3>
                         <p class="text-gray-500">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.</p>
