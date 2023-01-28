@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\TeamMessageSent;
 use App\Models\Team;
 use App\Models\TeamMessage;
 use Illuminate\Http\Request;
@@ -20,7 +21,7 @@ class TeamMessageController extends Controller
             "user_id" => Auth::user()->id
         ]);
 
-        //broadcast(new TeamMessageSent(Auth::user(), $request->message, $team_id))->toOthers();
+        broadcast(new TeamMessageSent(Auth::user(), $request->message, $team_id))->toOthers();
 
         return ["status" => "success"];
     }

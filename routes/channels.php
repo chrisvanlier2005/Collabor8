@@ -16,3 +16,6 @@ use Illuminate\Support\Facades\Broadcast;
 Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
     return (int) $user->id === (int) $id;
 });
+Broadcast::channel('team-message.{team_id}', function ($user, $team_id) {
+    return $user->teams->contains($team_id);
+});

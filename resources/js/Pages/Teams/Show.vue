@@ -11,6 +11,10 @@ let messageContainer = $ref(null);
 onMounted(() => {
     messageContainer.scrollTop = messageContainer.scrollHeight;
 });
+
+function sendMessage(event){
+    let message = event.target[0].value;
+}
 </script>
 <template>
     <AppLayout>
@@ -25,6 +29,12 @@ onMounted(() => {
                     </p>
                 </div>
             </article>
+        </section>
+        <section class="fixed bottom-0">
+            <form @submit.prevent="sendMessage($event)" class="flex flex-row gap-3 p-4">
+                <input type="text" class="flex-1 rounded border border-gray-300 p-2" />
+                <button type="submit" class="bg-blue-500 text-white rounded p-2">Send</button>
+            </form>
         </section>
     </AppLayout>
 </template>
