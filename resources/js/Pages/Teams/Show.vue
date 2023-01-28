@@ -1,6 +1,7 @@
 <script setup>
 import AppLayout from "@/Layouts/AppLayout.vue";
 import {onMounted} from "vue";
+import TeamHeader from "@/Components/Teams/TeamHeader.vue";
 
 const props = defineProps({
     team: Object,
@@ -18,7 +19,7 @@ function sendMessage(event){
 </script>
 <template>
     <AppLayout>
-
+        <TeamHeader :team="team"/>
         <section class="flex flex-col h-screen overflow-y-auto gap-4" ref="messageContainer">
             <article v-for="message in messages" class="flex flex-row gap-3 ">
                 <img :src="'https://ui-avatars.com/api/?background=random&name=' + message.user.name" :alt="message.user.name" class="w-12 h-12 rounded-full" />
